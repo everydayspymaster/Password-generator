@@ -1,0 +1,173 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --accent-color: #FFC107;
+    --error-color: #F44336;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.password-display {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#password {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    background-color: #333;
+    color: var(--text-color);
+    border-radius: 4px 0 0 4px;
+}
+
+#copy {
+    padding: 10px 15px;
+    background-color: var(--secondary-color);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: background-color 0.3s;
+}
+
+#copy:hover {
+    background-color: #1976D2;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#generate {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#generate:hover {
+    background-color: #45a049;
+}
+
+.password-info {
+    margin-top: 20px;
+}
+
+.strength, .time-to-crack {
+    margin-bottom: 10px;
+}
+
+#strengthMeter {
+    height: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+#strengthMeter::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0;
+    background-color: var(--error-color);
+    transition: width 0.3s, background-color 0.3s;
+}
+
+.info-box {
+    margin-top: 30px;
+    background-color: #333;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.info-box h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.info-box ul {
+    padding-left: 20px;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #password {
+        font-size: 16px;
+    }
+
+    .radio-group, .checkbox-group {
+        flex-direction: column;
+    }
+}
