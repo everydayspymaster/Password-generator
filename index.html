@@ -6,7 +6,6 @@
     <title>Password Generator</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <!-- Any other meta tags or links you need -->
     <style>
         :root {
             --bg-color: #1a1a1a;
@@ -17,14 +16,215 @@
             --error-color: #F44336;
         }
 
-        /* Additional CSS styles if needed */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .password-display {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #password {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            background-color: #333;
+            color: var(--text-color);
+            border-radius: 4px 0 0 4px;
+        }
+
+        #copy {
+            padding: 10px 15px;
+            background-color: var(--secondary-color);
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+            transition: background-color 0.3s;
+        }
+
+        #copy:hover {
+            background-color: #1976D2;
+        }
+
+        .options {
+            margin-bottom: 20px;
+        }
+
+        .option {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        #generate {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #generate:hover {
+            background-color: #45a049;
+        }
+
+        .password-info {
+            margin-top: 20px;
+        }
+
+        .strength, .time-to-crack {
+            margin-bottom: 10px;
+        }
+
+        #strengthMeter {
+            height: 10px;
+            background-color: #444;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        #strengthMeter::before {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 0;
+            background-color: var(--error-color);
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .info-box {
+            margin-top: 30px;
+            background-color: #333;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .info-box h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            #password {
+                font-size: 16px;
+            }
+
+            .radio-group, .checkbox-group {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Password Generator</h1>
         <div class="generator">
-            <!-- Your existing HTML content -->
+            <div class="password-display">
+                <input type="text" id="password" readonly>
+                <button id="copy" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="options">
+                <div class="option">
+                    <label for="length">Password Length:</label>
+                    <input type="range" id="length" min="8" max="64" value="16">
+                    <span id="lengthValue">16</span>
+                </div>
+                <div class="option">
+                    <label>Password Type:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="typePassword" name="passwordType" value="password" checked>
+                        <label for="typePassword">Password</label>
+                        <input type="radio" id="typePassphrase" name="passwordType" value="passphrase">
+                        <label for="typePassphrase">Passphrase</label>
+                    </div>
+                </div>
+                <div class="option">
+                    <label>Include:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="uppercase" checked>
+                        <label for="uppercase">A-Z</label>
+                        <input type="checkbox" id="lowercase" checked>
+                        <label for="lowercase">a-z</label>
+                        <input type="checkbox" id="numbers" checked>
+                        <label for="numbers">0-9</label>
+                        <input type="checkbox" id="symbols">
+                        <label for="symbols">!@#$%^&*</label>
+                    </div>
+                </div>
+            </div>
+            <button id="generate">Generate Password</button>
+            <div class="password-info">
+                <div class="strength">
+                    <label>Password Strength:</label>
+                    <div id="strengthMeter"></div>
+                    <span id="strengthText"></span>
+                </div>
+                <div class="time-to-crack">
+                    <label>Estimated Time to Crack:</label>
+                    <span id="crackTime"></span>
+                </div>
+            </div>
         </div>
         <div class="info-box">
             <h3>Principles of Strong Passwords</h3>
